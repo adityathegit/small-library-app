@@ -1,0 +1,86 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #ededed;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    background-color: #333;
+    color: white;
+    box-shadow: 5px 5px #b58686;
+    margin-bottom: 16px;
+    padding: 0.5em 1.5em ;
+}
+
+header h1 {
+    font-size: clamp(2rem, 3vw, 2.5rem);
+}
+
+header button {
+    padding: 0.5em 2em;
+    font-size: clamp(0.8rem, 1.5vw, 1rem);
+    font-weight: bold;
+    color: white;
+    background-color: #b58686;
+    border: none;
+    box-shadow: 3px 3px #774d4d;
+}
+
+header button:hover {
+    cursor: pointer;
+    border: 2px solid #774d4d;
+    box-shadow: 0 0;
+}
+
+.book-shelf {
+    display: flex;
+    align-items: center;
+    /*remember to add media query*/
+    /*justify-content: center;*/
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.book {
+    box-shadow: 5px 5px #b58686;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #333;
+    color: white;
+    min-width: 16rem;
+}
+
+.title-author {
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-weight: bold;
+}
+
+.author {
+    font-size: clamp(1rem, 1.5vw, 1.5rem);
+}
+
+.isreaded {
+    font-weight: bold;
+    text-align: end;
+}
+
+.price-pages {
+    display: flex;
+    flex-direction: column;
+    letter-spacing: 0.2px;
+}
+
+
