@@ -30,6 +30,7 @@ header button {
     background-color: #b58686;
     border: none;
     box-shadow: 3px 3px #774d4d;
+    outline: none;
 }
 
 header button:hover {
@@ -41,8 +42,6 @@ header button:hover {
 .book-shelf {
     display: flex;
     align-items: center;
-    /*remember to add media query*/
-    /*justify-content: center;*/
     flex-wrap: wrap;
     gap: 16px;
 }
@@ -84,3 +83,86 @@ header button:hover {
 }
 
 
+dialog {
+    border: none;
+    background-color: #333;
+    color: white;
+    font-size: clamp(1rem, 1.5vw, 1.2em);
+    font-weight: bold;
+    letter-spacing: 0.2px;
+    box-shadow: 5px 5px #b58686;
+}
+
+dialog::backdrop {
+  backdrop-filter: blur(5px);
+  background-color: rgb(86, 72, 72);
+  opacity: 0.5;
+}
+
+.form {
+    padding: 1em 1.5em;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+input[type="tel"],
+input[type="text"] {
+    padding: 0.5em 0.8em;
+    border: none;
+    background-color: #ededed;
+    font-size: clamp(0.9rem, 1.5vw, 1em);
+    color: #333;
+    box-shadow: 3px 3px #b58686;
+    width: 100%;
+}
+
+input[type="tel"]:focus,input[type="text"]:focus {
+    outline: none;
+    box-shadow: 3px 3px #f65a5a;
+}
+
+input[type="radio"] {
+    accent-color: #b5b5b5;
+}
+
+.radio {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.btn {
+    display: flex;
+    gap: 10px;
+    
+}
+
+.form button {
+    padding: 0.3em 1em;
+    font-size: clamp(0.8rem, 1.5vw, 1rem);
+    font-weight: bold;
+    color: white;
+    background-color: #b58686;
+    border: none;
+    box-shadow: 2px 2px #774d4d;
+}
+
+.form button:hover {
+    cursor: pointer;
+    border: 1px solid #774d4d;
+    box-shadow: 0 0;
+}
+
+
+@media (max-width: 1024px) {
+  .book {
+    flex-grow: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .book {
+    flex-grow: 1;
+  }
+}

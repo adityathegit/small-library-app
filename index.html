@@ -1,23 +1,78 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Library App</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<body>
+  <body>
     <div class="library">
-        <header class="header">
-            <h1>Library</h1>
-            <button id="js-add-book">Add</button>
-        </header>
-        <div id="js-book-shelf" class="book-shelf"></div>
+      <header class="header">
+        <h1>Library</h1>
+        <button id="js-new-book">New Book</button>
+      </header>
+      <div id="js-book-shelf" class="book-shelf"></div>
     </div>
-    
-    <script src="script.js"></script>
-</body>
 
+    <dialog id="js-dialog" closedby="none">
+      <form id="js-add-book-form" class="form" method="dialog" autocomplete="off">
+        <div>
+          <label for="title">Title:</label>
+          <br />
+          <input type="text" id="title" />
+        </div>
+
+        <div>
+          <label for="author">Author:</label>
+          <br />
+          <input type="text" id="author" />
+        </div>
+
+        <div>
+          <label for="pages">Pages:</label>
+          <br />
+          <input type="tel" id="pages" />
+        </div>
+
+        <div>
+          <label for="price">Price:</label>
+          <br />
+          <input type="tel" id="price" />
+        </div>
+
+        <div class="radio">
+          <div>
+            <input 
+              type="radio" 
+              id="readed" 
+              value="Readed" 
+              name="isreaded" 
+            />
+            <label for="readed">Readed</label>
+          </div>
+
+          <div>
+            <input
+              type="radio"
+              id="notreaded"
+              value="Not Readed"
+              name="isreaded"
+            />
+            <label for="notreaded">Not Readed</label>
+          </div>
+        </div>
+
+        <div class="btn">
+          <button id="js-add-btn" class="add-button" type="submit">Add</button>
+          <button id="js-close-btn">
+            Close
+          </button>
+        </div>
+      </form>
+    </dialog>
+
+    <script src="script.js"></script>
+  </body>
 </html>
