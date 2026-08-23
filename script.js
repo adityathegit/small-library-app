@@ -77,10 +77,7 @@ const get_values = () => {
     if (title_value !== "" && author_value !== "" && pages_value !== "" && price_value !== "" && readed_value !== "") {
         arr.push(title_value, author_value, pages_value, price_value, readed_value);
         return arr;
-    } else {
-        alert("Fill all fields.")
     }
-
     return [];
 }
 
@@ -88,7 +85,6 @@ const add_book_to_library = () => {
     const id = crypto.randomUUID();
 
     const values = get_values();
-    console.log(values);
 
     if (values.length !== 0) {
         const book = new Book(id, ...values)
@@ -165,6 +161,7 @@ close_btn.addEventListener("click", () => {
 add_btn.addEventListener("click", () => {
     get_values();
     add_book_to_library();
+    form.reset();
 })
 
 book_shelf.addEventListener("click", (event) => {
