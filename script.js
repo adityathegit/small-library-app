@@ -72,7 +72,6 @@ const get_values = () => {
     const price_value = price ? price.value : "";
     const readed_value = checked_radio ? checked_radio.value : "not specified";
 
-
     const arr = [];
 
     if (title_value !== "" && author_value !== "" && pages_value !== "" && price_value !== "" && readed_value !== "") {
@@ -115,7 +114,7 @@ const show_book = () => {
                     <span class="price">Price: ${book.price}</span>
                 </div>
                 <div class="isreaded">
-                    <span>${book.readed}</span>
+                    <button class="is-read-btn">${book.readed}</button>
                 </div>
             </div>
         `
@@ -127,11 +126,14 @@ const show_book = () => {
 const return_ID = (event) => {
     const delete_btn = event.target.closest(".close");
     
+    const selected_book = event.target.closest(".book");
+    const book_ID = selected_book.id;
+    
     if (delete_btn) {
-        const selected_book = event.target.closest(".book");
-        const book_ID = selected_book.id;
         remove_book(book_ID);
     }
+
+    change_read_status(event, book_ID)
 }
 
 const remove_book = (book_ID) => {
@@ -140,6 +142,15 @@ const remove_book = (book_ID) => {
         .findIndex(ID => ID === book_ID);
     library.splice(index, 1);
     show_book();
+}
+
+const change_read_status = (event, book_ID) => {
+    const change_btn = event.target.closest(".is-read-btn");
+    if(change_btn) {
+        const object = library.find(obj => obj.id === book_ID);
+        (object.readed === "Readed") ? object.readed = "Not Readed" : object.readed = "Readed";
+        show_book();
+    }
 }
 
 new_btn.addEventListener("click", () => {
@@ -159,7 +170,6 @@ add_btn.addEventListener("click", () => {
 book_shelf.addEventListener("click", (event) => {
     return_ID(event);
 })
-
 
 show_book();
 

@@ -76,6 +76,10 @@ header button:hover {
     text-align: end;
 }
 
+.is-read-btn {
+    padding: 0.3em 1em;
+}
+
 .price-pages {
     display: flex;
     flex-direction: column;
@@ -89,13 +93,13 @@ header button:hover {
     gap: 32px;
 }
 
-.close {
+.close, .is-read-btn {
     background-color: #b58686;
     color: #333;
     font-weight: bold;
 }
 
-.close:hover {
+.close:hover, .is-read-btn:hover {
     cursor: pointer;
 }
 
@@ -151,8 +155,7 @@ input[type="radio"] {
 
 .btn {
     display: flex;
-    gap: 10px;
-    
+    gap: 10px;   
 }
 
 .form button {
