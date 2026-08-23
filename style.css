@@ -82,6 +82,23 @@ header button:hover {
     letter-spacing: 0.2px;
 }
 
+.title-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 32px;
+}
+
+.close {
+    background-color: #b58686;
+    color: #333;
+    font-weight: bold;
+}
+
+.close:hover {
+    cursor: pointer;
+}
+
 
 dialog {
     border: none;

@@ -3,6 +3,7 @@ const dialog = document.querySelector("#js-dialog");
 const new_btn = document.querySelector("#js-new-book");
 const close_btn = document.querySelector("#js-close-btn");
 const add_btn = document.querySelector("#js-add-btn");
+const form = document.querySelector(".form");
 
 const library = [
     {
@@ -33,7 +34,7 @@ const library = [
     },
 
 ];
- 
+
 function Book(
     id,
     title,
@@ -74,7 +75,7 @@ const get_values = () => {
 
     const arr = [];
 
-    if(title_value !== "" && author_value !== "" && pages_value !== "" && price_value !== "" && readed_value !== "") {
+    if (title_value !== "" && author_value !== "" && pages_value !== "" && price_value !== "" && readed_value !== "") {
         arr.push(title_value, author_value, pages_value, price_value, readed_value);
         return arr;
     } else {
@@ -86,12 +87,11 @@ const get_values = () => {
 
 const add_book_to_library = () => {
     const id = crypto.randomUUID();
-    console.log(id);
 
     const values = get_values();
     console.log(values);
-    
-    if(values.length !== 0) {
+
+    if (values.length !== 0) {
         const book = new Book(id, ...values)
         library.push(book);
         show_book();
@@ -102,9 +102,12 @@ const show_book = () => {
     let html = "";
     library.map((book) => {
         html += `
-            <div class="book">
+            <div id="${book.id}" class="book">
                 <div class="title-author">
-                    <span class="title">${book.title}</span>
+                    <div class="title-btn">
+                        <span class="title">${book.title}</span>
+                        <button class="close">X</button>
+                    </div>
                     <span class="author">${book.author}</span>
                 </div>
                 <div class="price-pages">
@@ -119,7 +122,25 @@ const show_book = () => {
     })
 
     book_shelf.innerHTML = html;
-} 
+}
+
+const return_ID = (event) => {
+    const delete_btn = event.target.closest(".close");
+    
+    if (delete_btn) {
+        const selected_book = event.target.closest(".book");
+        const book_ID = selected_book.id;
+        remove_book(book_ID);
+    }
+}
+
+const remove_book = (book_ID) => {
+    const index = library
+        .map((book) => book.id)
+        .findIndex(ID => ID === book_ID);
+    library.splice(index, 1);
+    show_book();
+}
 
 new_btn.addEventListener("click", () => {
     show_dialog();
@@ -127,12 +148,18 @@ new_btn.addEventListener("click", () => {
 
 close_btn.addEventListener("click", () => {
     close_dialog();
+    form.reset();
 })
 
 add_btn.addEventListener("click", () => {
     get_values();
     add_book_to_library();
 })
+
+book_shelf.addEventListener("click", (event) => {
+    return_ID(event);
+})
+
 
 show_book();
 
