@@ -78,6 +78,7 @@ header button:hover {
 
 .is-read-btn {
     padding: 0.3em 1em;
+    border: none;
 }
 
 .price-pages {
@@ -99,10 +100,14 @@ header button:hover {
     font-weight: bold;
 }
 
-.close:hover, .is-read-btn:hover {
+.close:hover {
     cursor: pointer;
 }
 
+.is-read-btn:hover {
+    border: 2px solid#774d4d;
+    cursor: pointer;
+}
 
 dialog {
     border: none;
