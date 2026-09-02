@@ -35,61 +35,54 @@ const library = [
 
 ];
 
-function Book(
-    id,
-    title,
-    author,
-    pages,
-    price,
-    readed
-) {
-    if (!new.target) {
-        throw Error("")
+class Book {
+    constructor(
+        id,
+        title,
+        author,
+        pages,
+        price,
+        readed
+    ) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.price = price;
+        this.readed = readed;
     }
 
-    this.id = id;
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.price = price;
-    this.readed = readed;
+    getBookDetails() {
+        const title = document.querySelector("#title");
+        const author = document.querySelector("#author");
+        const pages = document.querySelector("#pages");
+        const price = document.querySelector("#price");
+        const checked_radio = document.querySelector('input[name="isreaded"]:checked');
+
+        const title_value = title ? title.value : "";
+        const author_value = author ? author.value : "";
+        const pages_value = pages ? pages.value : "";
+        const price_value = price ? price.value : "";
+        const readed_value = checked_radio ? checked_radio.value : "not specified";
+
+        if (title_value !== "" && author_value !== "" && pages_value !== "" && price_value !== "" && readed_value !== "") {
+            return [crypto.randomUUID(), title_value, author_value, pages_value, price_value, readed_value];
+        }
+        return null;
+    }
 }
 
 const show_dialog = () => dialog.showModal();
-
 const close_dialog = () => dialog.close();
 
-const get_values = () => {
-    const title = document.querySelector("#title");
-    const author = document.querySelector("#author");
-    const pages = document.querySelector("#pages");
-    const price = document.querySelector("#price");
-    const checked_radio = document.querySelector('input[name="isreaded"]:checked');
-
-    const title_value = title ? title.value : "";
-    const author_value = author ? author.value : "";
-    const pages_value = pages ? pages.value : "";
-    const price_value = price ? price.value : "";
-    const readed_value = checked_radio ? checked_radio.value : "not specified";
-
-    const arr = [];
-
-    if (title_value !== "" && author_value !== "" && pages_value !== "" && price_value !== "" && readed_value !== "") {
-        arr.push(title_value, author_value, pages_value, price_value, readed_value);
-        return arr;
-    }
-    return [];
-}
-
 const add_book_to_library = () => {
-    const id = crypto.randomUUID();
+    const values = new Book().getBookDetails();
 
-    const values = get_values();
-
-    if (values.length !== 0) {
-        const book = new Book(id, ...values)
+    if(values) {
+        const book = new Book(...values);
         library.push(book);
         show_book();
+        close_dialog();
     }
 }
 
@@ -121,12 +114,15 @@ const show_book = () => {
 
 const return_ID = (event) => {
     const delete_btn = event.target.closest(".close");
-    
+
     const selected_book = event.target.closest(".book");
+    if(!selected_book) return;
+
     const book_ID = selected_book.id;
-    
+
     if (delete_btn) {
         remove_book(book_ID);
+        return;
     }
 
     change_read_status(event, book_ID)
@@ -136,13 +132,15 @@ const remove_book = (book_ID) => {
     const index = library
         .map((book) => book.id)
         .findIndex(ID => ID === book_ID);
-    library.splice(index, 1);
-    show_book();
+    if(index !== -1) {
+        library.splice(index, 1);
+        show_book();
+    }
 }
 
 const change_read_status = (event, book_ID) => {
     const change_btn = event.target.closest(".is-read-btn");
-    if(change_btn) {
+    if (change_btn) {
         const object = library.find(obj => obj.id === book_ID);
         (object.readed === "Readed") ? object.readed = "Not Readed" : object.readed = "Readed";
         show_book();
@@ -158,8 +156,8 @@ close_btn.addEventListener("click", () => {
     form.reset();
 })
 
-add_btn.addEventListener("click", () => {
-    get_values();
+add_btn.addEventListener("click", (e) => {
+    e.preventDefault();
     add_book_to_library();
     form.reset();
 })
